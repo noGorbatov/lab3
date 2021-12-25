@@ -55,7 +55,11 @@ public class AirportApp {
         JavaPairRDD<AirportKey, FlightData> airportStats = statsRdd.reduceByKey(
                 FlightData::add);
 
-        airportStats.map
+        JavaRDD<String> resultStats = airportStats.map(
+                (key, statsData) -> {
+                    airportsBroadcasted.value()[
+                }
+        )
 
     }
 }
