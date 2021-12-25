@@ -25,6 +25,10 @@ public class AirportApp {
         System.out.println("unfiltered records " + stats.count());
         JavaRDD<String> filteredStats = stats.filter( s -> Character.isDigit(s.charAt(0)) );
         System.out.println("filtered records " + filteredStats.count());
-        JavaPairRDD<AirportKey, FlightData> statsRdd = filteredStats.mapToPair(line -> new Tuple2<>(new Airport))
+        JavaPairRDD<AirportKey, FlightData> statsRdd = filteredStats.mapToPair({
+                    ParsedData parsedData = ParsedData.parse()
+                    parsedData -> new Tuple2<>(new AirportKey(parsedData.))
+                }
+        )
     }
 }
