@@ -41,7 +41,7 @@ public class AirportApp {
         );
 
         JavaPairRDD<Tuple2<Integer, Integer>, FlightData> airportStats = statsRdd.reduceByKey(
-                (flightAcc, flightData) -> flightAcc.add(flightData)
+                (flightAcc, flightData) -> flightAcc.add2(flightData)
         );
 //        JavaPairRDD<Tuple2<Integer, Integer>, FlightData> airportStats = statsRdd.groupByKey().mapToPair(
 //                entry -> {

@@ -58,4 +58,19 @@ public class FlightData implements Serializable {
         }
         return this;
     }
+
+    public FlightData add2(FlightData data) {
+        flightNumber++;
+        if (data.cancelled) {
+            cancelledNumber++;
+            return this;
+        }
+        if (data.delayed) {
+            delayedNumber++;
+            if (data.delayTime > maxDelayTime) {
+                maxDelayTime = data.delayTime;
+            }
+        }
+        return this;
+    }
 }
