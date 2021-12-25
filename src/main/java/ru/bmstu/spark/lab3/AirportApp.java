@@ -19,13 +19,6 @@ public class AirportApp {
         SparkConf conf = new SparkConf().setAppName("lab3");
         JavaSparkContext sc = new JavaSparkContext(conf);
         JavaRDD<String> ids = sc.textFile("/ids.csv");
-        List<String> res = ids.collect();
-        int i = 0;
-        for (String line: res) {
-            System.out.println(line);
-            i++;
-            if (i > 5) break;
-        }
 
         JavaRDD<String> filteredIds = ids.filter( line -> !Character.isAlphabetic(line.charAt(0)) );
         JavaPairRDD<Integer, String> airportMapRdd = filteredIds.mapToPair(
@@ -39,9 +32,7 @@ public class AirportApp {
         final Broadcast<Map<Integer, String>> airportsBroadcasted = sc.broadcast(airportMapRdd.collectAsMap());
 
         JavaRDD<String> stats = sc.textFile("/stats.csv");
-        System.out.println("unfiltered records " + stats.count());
         JavaRDD<String> filteredStats = stats.filter( line -> Character.isDigit(line.charAt(0)) );
-        System.out.println("filtered records " + filteredStats.count());
         JavaPairRDD<AirportKey, FlightData> statsRdd = filteredStats.mapToPair(line -> {
                     ParsedData parsedData = ParsedData.parse(line);
                     return new Tuple2<>(new AirportKey(parsedData.getSrcAirport(), parsedData.getDestAirport()),
@@ -50,10 +41,20 @@ public class AirportApp {
                 }
         );
 
-        statsRdd.take(3).forEach(obj -> System.out.println(obj._1 + "\n" + obj._2 + "\n"));
-
-        JavaPairRDD<AirportKey, FlightData> airportStats = statsRdd.reduceByKey(
-                (flightAcc, flightData) -> flightAcc.add(flightData)
+//        JavaPairRDD<AirportKey, FlightData> airportStats = statsRdd.reduceByKey(
+//                (flightAcc, flightData) -> flightAcc.add(flightData)
+//        );
+        JavaPairRDD<AirportKey, Iterable<FlightData>> airportGrouped = statsRdd.groupByKey();
+        JavaPairRDD<AirportKey, FlightData> airportStats = airportGrouped.mapToPair(
+                entry -> {
+                    AirportKey key = entry._1;
+                    Iterable<FlightData> group = entry._2;
+                    FlightData res = new FlightData();
+                    for (FlightData data: group) {
+                        res = res.add(data);
+                    }
+                    return new Tuple2<>(key, res);
+                }
         );
 
         JavaRDD<String> resultStats = airportStats.map(
