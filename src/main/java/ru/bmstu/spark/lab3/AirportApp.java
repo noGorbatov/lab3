@@ -7,7 +7,6 @@ import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.broadcast.Broadcast;
 import scala.Tuple2;
 
-import java.util.List;
 import java.util.Map;
 
 public class AirportApp {
@@ -44,8 +43,7 @@ public class AirportApp {
 //        JavaPairRDD<AirportKey, FlightData> airportStats = statsRdd.reduceByKey(
 //                (flightAcc, flightData) -> flightAcc.add(flightData)
 //        );
-        JavaPairRDD<Tuple2<Integer, Integer>, Iterable<FlightData>> airportGrouped = statsRdd.groupByKey();
-        JavaPairRDD<Tuple2<Integer, Integer>, FlightData> airportStats = airportGrouped.mapToPair(
+        JavaPairRDD<Tuple2<Integer, Integer>, FlightData> airportStats = statsRdd.groupByKey().mapToPair(
                 entry -> {
                     Tuple2<Integer, Integer> key = entry._1;
                     Iterable<FlightData> group = entry._2;
