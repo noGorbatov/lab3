@@ -13,11 +13,17 @@ public class AirportApp {
     private static final String KEY_NAME_SEP = ",\"";
     private static final int KEY_POS = 0;
     private static final int NAME_POS = 1;
+    private static final String IDS_PATH = "/ids.csv";
+    private static final String STATS_PATH = "/stats.csv";
+    private static final String RESULT_PATH = "results";
+    private static final String APP_NAME = "lab3";
+    private static final String IDS_PATH = "\";
+
 
     public static void main(String[] args) {
-        SparkConf conf = new SparkConf().setAppName("lab3");
+        SparkConf conf = new SparkConf().setAppName(APP_NAME);
         JavaSparkContext sc = new JavaSparkContext(conf);
-        JavaRDD<String> ids = sc.textFile("/ids.csv");
+        JavaRDD<String> ids = sc.textFile(IDS_PATH);
 
         JavaRDD<String> filteredIds = ids.filter( line -> !Character.isAlphabetic(line.charAt(0)) );
         JavaPairRDD<Integer, String> airportMapRdd = filteredIds.mapToPair(
@@ -30,7 +36,7 @@ public class AirportApp {
 
         final Broadcast<Map<Integer, String>> airportsBroadcasted = sc.broadcast(airportMapRdd.collectAsMap());
 
-        JavaRDD<String> stats = sc.textFile("/stats.csv");
+        JavaRDD<String> stats = sc.textFile(STATS_PATH);
         JavaRDD<String> filteredStats = stats.filter( line -> Character.isDigit(line.charAt(0)) );
         JavaPairRDD<Tuple2<Integer, Integer>, FlightData> statsRdd = filteredStats.mapToPair(line -> {
                     ParsedData parsedData = ParsedData.parse(line);
@@ -77,6 +83,6 @@ public class AirportApp {
                 }
         );
 
-        resultStats.saveAsTextFile("results");
+        resultStats.saveAsTextFile(RESULT_PATH);
     }
 }
