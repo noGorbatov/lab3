@@ -4,6 +4,7 @@ import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.broadcast.Broadcast;
 import scala.Tuple2;
 
 import java.util.List;
@@ -34,7 +35,10 @@ public class AirportApp {
                     String name = pair[NAME_POS].replaceAll("\"", "");
                     return new Tuple2<>(key, name);
         });
-        
+
+        final Broadcast<Map<Integer, String>> airportsBroadcasted = sc.broadcast(airportMapRdd.collectAsMap());
+
+
 
         JavaRDD<String> stats = sc.textFile("/stats.csv");
         System.out.println("unfiltered records " + stats.count());
@@ -52,6 +56,8 @@ public class AirportApp {
 
         JavaPairRDD<AirportKey, FlightData> airportStats = statsRdd.reduceByKey(
                 FlightData::add);
+
+        
 
     }
 }
