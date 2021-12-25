@@ -43,22 +43,22 @@ public class AirportApp {
         /*JavaPairRDD<Tuple2<Integer, Integer>, FlightData> airportStats = statsRdd.reduceByKey(
                 (flightAcc, flightData) -> flightAcc.add2(flightData)
         );*/
-//        JavaPairRDD<Tuple2<Integer, Integer>, FlightData> airportStats = statsRdd.groupByKey().mapToPair(
-//                entry -> {
-//                    Tuple2<Integer, Integer> key = entry._1;
-//                    Iterable<FlightData> group = entry._2;
-//                    FlightData res = new FlightData();
-//                    for (FlightData data: group) {
-//                        res = res.add(data);
-//                    }
-//                    return new Tuple2<>(key, res);
-//                }
-//        );
-        JavaPairRDD<Tuple2<Integer, Integer>, FlightData> airportStats = statsRdd.combineByKey(
-                FlightData::new,
-                FlightData::add,
-                FlightData::addCombiner
+        JavaPairRDD<Tuple2<Integer, Integer>, FlightData> airportStats = statsRdd.groupByKey().mapToPair(
+                entry -> {
+                    Tuple2<Integer, Integer> key = entry._1;
+                    Iterable<FlightData> group = entry._2;
+                    FlightData res = new FlightData();
+                    for (FlightData data: group) {
+                        res = res.add(data);
+                    }
+                    return new Tuple2<>(key, res);
+                }
         );
+//        JavaPairRDD<Tuple2<Integer, Integer>, FlightData> airportStats = statsRdd.combineByKey(
+//                FlightData::new,
+//                FlightData::add,
+//                FlightData::addCombiner
+//        );
 
         JavaRDD<String> resultStats = airportStats.map(
                 (entry) -> {
