@@ -19,7 +19,7 @@ public class ParsedData implements Serializable {
         ParsedData res = new ParsedData();
         res.srcAirport = Integer.parseInt(data[SRC_AIRPORT_POS]);
         res.destAirport = Integer.parseInt(data[DEST_AIRPORT_POS]);
-        res.cancelled = data[CANCELLED_POS];
+        res.cancelled = data[CANCELLED_POS].equals("1");
         res.delayTime = Integer.parseInt(data[DELAY_TIME_POS]);
         res.delayed = res.delayTime > 0;
     }
