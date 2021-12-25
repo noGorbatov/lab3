@@ -1,4 +1,8 @@
 package ru.bmstu.spark.lab3;
 
-public class ParsedData {
+import java.io.Serializable;
+
+public class ParsedData implements Serializable {
+    private int srcAirport;
+    private int destAirport;
 }
