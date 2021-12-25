@@ -17,4 +17,12 @@ public class AirportKey implements Serializable {
     public int getSrcAirport() {
         return srcAirport;
     }
+
+    @Override
+    public String toString() {
+        return "AirportKey{" +
+                "srcAirport=" + srcAirport +
+                ", destAirport=" + destAirport +
+                '}';
+    }
 }
