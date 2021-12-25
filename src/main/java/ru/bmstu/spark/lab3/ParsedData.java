@@ -8,7 +8,9 @@ public class ParsedData implements Serializable {
     private int delayTime;
     private boolean delayed;
     private boolean cancelled;
+    private static String SPACE_SEP = " ";
     public static ParsedData parse(String line) {
-        
+        String[] data = line.split(SPACE_SEP);
+        if ()
     }
 }
