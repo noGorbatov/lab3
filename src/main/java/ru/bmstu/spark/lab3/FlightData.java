@@ -6,6 +6,7 @@ public class FlightData implements Serializable {
     private float delayTime;
     private boolean delayed;
     private boolean cancelled;
+    private float 
     public FlightData(float delayTime, boolean delayed, boolean cancelled) {
         this.delayTime = delayTime;
         this.delayed = delayed;
