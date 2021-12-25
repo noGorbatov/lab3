@@ -21,6 +21,8 @@ public class AirportApp {
             if (i > 5) break;
         }
 
+        ids.collect
+
         JavaRDD<String> stats = sc.textFile("/stats.csv");
         System.out.println("unfiltered records " + stats.count());
         JavaRDD<String> filteredStats = stats.filter( s -> Character.isDigit(s.charAt(0)) );
@@ -37,6 +39,6 @@ public class AirportApp {
 
         JavaPairRDD<AirportKey, FlightData> airportStats = statsRdd.reduceByKey(
                 FlightData::add);
-        
+
     }
 }
