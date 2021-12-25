@@ -7,6 +7,7 @@ import org.apache.spark.api.java.JavaSparkContext;
 import scala.Tuple2;
 
 import java.util.List;
+import java.util.Map;
 
 public class AirportApp {
     private static String COMMA_SEP = ",";
@@ -31,8 +32,9 @@ public class AirportApp {
                     String[] pair = line.split(COMMA_SEP);
                     int key = Integer.parseInt(pair[KEY_POS].replaceAll("\"", ""));
                     String name = pair[NAME_POS].replaceAll("\"", "");
-                    
+                    return new Tuple2<>(key, name);
         });
+        
 
         JavaRDD<String> stats = sc.textFile("/stats.csv");
         System.out.println("unfiltered records " + stats.count());
