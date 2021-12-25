@@ -21,7 +21,7 @@ public class AirportApp {
             if (i > 5) break;
         }
 
-        JavaRDD
+        JavaRDD<String> ids
 
         JavaRDD<String> stats = sc.textFile("/stats.csv");
         System.out.println("unfiltered records " + stats.count());
