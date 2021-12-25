@@ -7,7 +7,7 @@ public class FlightData implements Serializable {
     private boolean delayed = false;
     private boolean cancelled = false;
     private float maxDelayTime = 0;
-    private int flightNumber = 0;
+    private int flightNumber = 1;
     private int delayedNumber = 0;
     private int cancelledNumber = 0;
     private static final int PERCENT_MULT = 100;
@@ -18,6 +18,7 @@ public class FlightData implements Serializable {
     }
 
     public FlightData(FlightData fData) {
+        this.flightNumber = 1;
         this.maxDelayTime = fData.delayTime;
         this.cancelledNumber = fData.cancelled ? 1 : 0;
         this.delayedNumber = fData.delayed ? 1 : 0;
