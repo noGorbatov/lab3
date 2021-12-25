@@ -69,7 +69,7 @@ public class AirportApp {
                 }
         );
 
-        resultStats.saveAsTextFile("/results.txt");
+        resultStats.saveAsTextFile("results.txt");
 
     }
 }
