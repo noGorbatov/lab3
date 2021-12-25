@@ -78,6 +78,5 @@ public class AirportApp {
         );
 
         resultStats.saveAsTextFile("results");
-
     }
 }
