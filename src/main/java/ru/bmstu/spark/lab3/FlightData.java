@@ -23,6 +23,8 @@ public class FlightData implements Serializable {
         this.delayedNumber = fData.delayed ? 1 : 0;
     }
 
+    public FlightData() {}
+
     public float getMaxDelayTime() {
         return maxDelayTime;
     }
@@ -63,18 +65,12 @@ public class FlightData implements Serializable {
         return this;
     }
 
-    public FlightData add2(FlightData data) {
-        flightNumber++;
-        if (data.cancelled) {
-            cancelledNumber++;
-            return this;
-        }
-        if (data.delayed) {
-            delayedNumber++;
-            if (data.delayTime > maxDelayTime) {
-                maxDelayTime = data.delayTime;
-            }
-        }
-        return this;
+    public FlightData addCombiner(FlightData data) {
+        FlightData res = new FlightData();
+        res.flightNumber = this.flightNumber + data.flightNumber;
+        res.cancelledNumber = this.cancelledNumber + data.cancelledNumber;
+        res.delayedNumber = this.delayedNumber = data.delayedNumber;
+        res.maxDelayTime = Math.max(this.maxDelayTime, data.maxDelayTime);
+        return res;
     }
 }

@@ -55,10 +55,10 @@ public class AirportApp {
 //                }
 //        );
         JavaPairRDD<Tuple2<Integer, Integer>, FlightData> airportStats = statsRdd.combineByKey(
-                fData -> {return new FlightData(fData.getValue())},
-                (combiner, fData) -> combiner.add(fData.hashCode()))
-
-        )
+                FlightData::new,
+                FlightData::add,
+                FlightData::addCombiner
+        );
 
         JavaRDD<String> resultStats = airportStats.map(
                 (entry) -> {
