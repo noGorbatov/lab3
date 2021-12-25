@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.Map;
 
 public class AirportApp {
-    private static String COMMA_SEP = ",";
-    private static int KEY_POS = 0;
-    private static int NAME_POS = 1;
+    private static final String COMMA_SEP = ",";
+    private static final int KEY_POS = 0;
+    private static final int NAME_POS = 1;
 
     public static void main(String[] args) {
         SparkConf conf = new SparkConf().setAppName("lab3");
