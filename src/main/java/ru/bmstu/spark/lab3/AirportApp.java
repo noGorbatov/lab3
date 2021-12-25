@@ -63,7 +63,7 @@ public class AirportApp {
                     String srcAirport = airportsInfo.get(key.getSrcAirport());
                     String destAirport = airportsInfo.get(key.getDestAirport());
                     return "Flights stats:\nfrom " + srcAirport + "\nto" + destAirport +
-                            " max delay time = " + data.getMaxDelayTime() + "\ndelayed flights = " +
+                            "\nmax delay time = " + data.getMaxDelayTime() + "\ndelayed flights = " +
                             data.getDelayedPercent() + "%\ncancelled flights = " +
                             data.getCancelledPercent() + "%\n\n";
                 }
