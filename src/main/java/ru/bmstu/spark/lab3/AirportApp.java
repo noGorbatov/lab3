@@ -21,6 +21,6 @@ public class AirportApp {
         }
 
         JavaRDD<String> stats = sc.textFile("/stats.csv");
-        JavaPairRDD<>
+        JavaPairRDD<AirportKey, FlightData> statsRdd = stats.mapToPair(line -> return )
     }
 }
