@@ -1,4 +1,7 @@
 package ru.bmstu.spark.lab3;
 
-public class FlightData {
+import java.io.Serializable;
+
+public class FlightData implements Serializable {
+    
 }
