@@ -21,7 +21,13 @@ public class FlightData implements Serializable {
     }
 
     public float getDelayedPercent() {
-        return 
+        if (flightNumber == 0) return -1;
+        return (float)delayedNumber / flightNumber;
+    }
+
+    public float getCancelledPercent() {
+        if (flightNumber == 0) return -1;
+        return (float)cancelledNumber / flightNumber;
     }
 
     @Override

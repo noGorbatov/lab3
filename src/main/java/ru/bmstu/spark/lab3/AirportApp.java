@@ -59,7 +59,10 @@ public class AirportApp {
                 (entry) -> {
                     AirportKey key = entry._1;
                     FlightData data = entry._2;
-                    float maxDelay = data.
+                    Map<Integer, String> airportsInfo = airportsBroadcasted.value();
+                    String srcAirport = airportsInfo.get(key.getSrcAirport());
+                    String destAirport = airportsInfo.get(key.getDestAirport());
+                    return "Flights stats from " +
                 }
         );
 
