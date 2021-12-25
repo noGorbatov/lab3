@@ -1,2 +1,4 @@
-package ru.bmstu.spark.lab3;public class AirportApp {
+package ru.bmstu.spark.lab3;
+
+public class AirportApp {
 }
