@@ -27,7 +27,7 @@ public class AirportApp {
         System.out.println("filtered records " + filteredStats.count());
         JavaPairRDD<AirportKey, FlightData> statsRdd = filteredStats.mapToPair(line -> {
                     ParsedData parsedData = ParsedData.parse(line);
-                    return new Tuple2<>(new AirportKey(parsedData.get))
+                    return new Tuple2<>(new AirportKey(parsedData.getSrcAirport(), parsedData.getDestAirport()), new FlightData())
                 }
         )
     }
