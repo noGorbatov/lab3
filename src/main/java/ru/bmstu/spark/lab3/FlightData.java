@@ -10,6 +10,7 @@ public class FlightData implements Serializable {
     private int flightNumber = 0;
     private int delayedNumber = 0;
     private int cancelledNumber = 0;
+    private static int PERCENT_MULT = 100;
     public FlightData(float delayTime, boolean delayed, boolean cancelled) {
         this.delayTime = delayTime;
         this.delayed = delayed;
@@ -22,12 +23,12 @@ public class FlightData implements Serializable {
 
     public float getDelayedPercent() {
         if (flightNumber == 0) return -1;
-        return (float)delayedNumber / flightNumber;
+        return (float)delayedNumber / flightNumber * PERCENT_MULT;
     }
 
     public float getCancelledPercent() {
         if (flightNumber == 0) return -1;
-        return (float)cancelledNumber / flightNumber;
+        return (float)cancelledNumber / flightNumber * PERCENT_MULT;
     }
 
     @Override
