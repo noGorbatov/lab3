@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class ParsedData implements Serializable {
     private int srcAirport;
     private int destAirport;
-    private int delayTime;
+    private float delayTime;
     private boolean delayed;
     private boolean cancelled;
     private static String SPACE_SEP = ",";
@@ -23,7 +23,7 @@ public class ParsedData implements Serializable {
         if (res.cancelled) {
             return res;
         }
-        res.delayTime = Integer.parseInt(data[DELAY_TIME_POS]);
+        res.delayTime = Float.parseFloat(data[DELAY_TIME_POS]);
         res.delayed = res.delayTime > 0;
         return res;
     }
@@ -36,7 +36,7 @@ public class ParsedData implements Serializable {
         return destAirport;
     }
 
-    public int getDelayTime() {
+    public float getDelayTime() {
         return delayTime;
     }
 
