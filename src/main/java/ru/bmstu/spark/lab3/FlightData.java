@@ -18,7 +18,7 @@ public class FlightData implements Serializable {
     }
 
     public FlightData(FlightData fData) {
-        
+
     }
 
     public float getMaxDelayTime() {
