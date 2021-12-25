@@ -22,6 +22,6 @@ public class AirportApp {
         }
 
         JavaRDD<String> stats = sc.textFile("/stats.csv");
-        JavaPairRDD<AirportKey, FlightData> statsRdd = stats.mapToPair(line -> new Tuple2<>())
+        JavaPairRDD<AirportKey, FlightData> statsRdd = stats.mapToPair(line -> new Tuple2<>(new Airport))
     }
 }
