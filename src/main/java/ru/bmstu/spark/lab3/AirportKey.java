@@ -1,6 +1,7 @@
 package ru.bmstu.spark.lab3;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class AirportKey implements Serializable {
     private int srcAirport;
@@ -24,5 +25,18 @@ public class AirportKey implements Serializable {
                 "srcAirport=" + srcAirport +
                 ", destAirport=" + destAirport +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AirportKey that = (AirportKey) o;
+        return srcAirport == that.srcAirport && destAirport == that.destAirport;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(srcAirport, destAirport);
     }
 }
