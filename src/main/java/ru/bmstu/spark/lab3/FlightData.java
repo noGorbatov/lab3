@@ -21,14 +21,16 @@ public class FlightData implements Serializable {
         return maxDelayTime;
     }
 
-    public float getDelayedPercent() {
+    public int getDelayedPercent() {
         if (flightNumber == 0) return -1;
-        return (float)delayedNumber / flightNumber * PERCENT_MULT;
+        float res = (float)delayedNumber / flightNumber * PERCENT_MULT;
+        return (int) res;
     }
 
-    public float getCancelledPercent() {
+    public int getCancelledPercent() {
         if (flightNumber == 0) return -1;
-        return (float)cancelledNumber / flightNumber * PERCENT_MULT;
+        float res = (float)cancelledNumber / flightNumber * PERCENT_MULT;
+        return (int) res;
     }
 
     @Override
