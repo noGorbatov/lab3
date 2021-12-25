@@ -31,6 +31,6 @@ public class AirportApp {
                                         new FlightData(parsedData.getDelayTime(), parsedData.getDelayed(), parsedData.getCancelled()));
                 }
         );
-        statsRdd.take(3).forEach(obj -> System.out.println(obj._1, obj._2));
+        statsRdd.take(3).forEach(obj -> System.out.println(obj._1 + "\n" + obj._2 + "\n"));
     }
 }
