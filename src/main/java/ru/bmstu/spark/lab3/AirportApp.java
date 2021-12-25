@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 public class AirportApp {
-    private static final String COMMA_SEP = ",";
+    private static final String KEY_NAME_SEP = ",\"";
     private static final int KEY_POS = 0;
     private static final int NAME_POS = 1;
 
@@ -30,7 +30,7 @@ public class AirportApp {
         JavaRDD<String> filteredIds = ids.filter( line -> !Character.isAlphabetic(line.charAt(0)) );
         JavaPairRDD<Integer, String> airportMapRdd = filteredIds.mapToPair(
                 line -> {
-                    String[] pair = line.split(COMMA_SEP);
+                    String[] pair = line.split(KEY_NAME_SEP);
                     int key = Integer.parseInt(pair[KEY_POS].replaceAll("\"", ""));
                     String name = pair[NAME_POS].replaceAll("\"", "");
                     return new Tuple2<>(key, name);
