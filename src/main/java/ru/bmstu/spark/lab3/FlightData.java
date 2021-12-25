@@ -1,2 +1,4 @@
-package ru.bmstu.spark.lab3;public class FlightData {
+package ru.bmstu.spark.lab3;
+
+public class FlightData {
 }
