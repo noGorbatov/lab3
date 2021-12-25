@@ -17,7 +17,7 @@ public class AirportApp {
     private static final String STATS_PATH = "/stats.csv";
     private static final String RESULT_PATH = "results";
     private static final String APP_NAME = "lab3";
-    private static final String IDS_PATH = "\";
+    private static final String EMBRACING_QUOTES = "\"";
 
 
     public static void main(String[] args) {
@@ -29,8 +29,8 @@ public class AirportApp {
         JavaPairRDD<Integer, String> airportMapRdd = filteredIds.mapToPair(
                 line -> {
                     String[] pair = line.split(KEY_NAME_SEP);
-                    int key = Integer.parseInt(pair[KEY_POS].replaceAll("\"", ""));
-                    String name = pair[NAME_POS].replaceAll("\"", "");
+                    int key = Integer.parseInt(pair[KEY_POS].replaceAll(EMBRACING_QUOTES, ""));
+                    String name = pair[NAME_POS].replaceAll(EMBRACING_QUOTES, "");
                     return new Tuple2<>(key, name);
         });
 
