@@ -13,13 +13,14 @@ public class ParsedData implements Serializable {
     private static final int DEST_AIRPORT_POS = 14;
     private static final int DELAY_TIME_POS = 18;
     private static final int CANCELLED_POS = 19;
+    private static final String CANCELLED_VALUE = "1.00";
 
     public static ParsedData parse(String line) {
         String[] data = line.split(SPACE_SEP);
         ParsedData res = new ParsedData();
         res.srcAirport = Integer.parseInt(data[SRC_AIRPORT_POS]);
         res.destAirport = Integer.parseInt(data[DEST_AIRPORT_POS]);
-        res.cancelled = data[CANCELLED_POS].equals("1.00");
+        res.cancelled = data[CANCELLED_POS].equals(CANCELLED_VALUE);
         if (res.cancelled) {
             return res;
         }

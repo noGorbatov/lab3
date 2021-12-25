@@ -29,10 +29,10 @@ public class FlightData implements Serializable {
         return (int) res;
     }
 
-    public float getCancelledPercent() {
+    public int getCancelledPercent() {
         if (flightNumber == 0) return -1;
         float res = (float)cancelledNumber / flightNumber * PERCENT_MULT;
-        return res;
+        return (int)res;
     }
 
     @Override
