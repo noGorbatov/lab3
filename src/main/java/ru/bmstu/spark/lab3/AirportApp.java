@@ -38,8 +38,6 @@ public class AirportApp {
 
         final Broadcast<Map<Integer, String>> airportsBroadcasted = sc.broadcast(airportMapRdd.collectAsMap());
 
-
-
         JavaRDD<String> stats = sc.textFile("/stats.csv");
         System.out.println("unfiltered records " + stats.count());
         JavaRDD<String> filteredStats = stats.filter( line -> Character.isDigit(line.charAt(0)) );
