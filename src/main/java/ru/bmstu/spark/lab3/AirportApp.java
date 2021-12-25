@@ -10,7 +10,7 @@ public class AirportApp {
     public static void main(String[] args) {
         SparkConf conf = new SparkConf().setAppName("lab3");
         JavaSparkContext sc = new JavaSparkContext(conf);
-        JavaRDD<String> stats = sc.textFile("ids.csv");
+        JavaRDD<String> stats = sc.textFile("/ids.csv");
         List<String> res = stats.collect();
         int i = 0;
         for (String line: res) {
