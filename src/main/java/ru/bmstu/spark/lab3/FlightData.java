@@ -11,4 +11,13 @@ public class FlightData implements Serializable {
         this.delayed = delayed;
         this.cancelled = cancelled;
     }
+
+    @Override
+    public String toString() {
+        return "FlightData{" +
+                "delayTime=" + delayTime +
+                ", delayed=" + delayed +
+                ", cancelled=" + cancelled +
+                '}';
+    }
 }
