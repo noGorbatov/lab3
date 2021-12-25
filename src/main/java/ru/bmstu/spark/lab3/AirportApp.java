@@ -55,7 +55,7 @@ public class AirportApp {
         JavaPairRDD<AirportKey, FlightData> airportStats = statsRdd.reduceByKey(
                 FlightData::add);
 
-        
+        airportStats.red
 
     }
 }
