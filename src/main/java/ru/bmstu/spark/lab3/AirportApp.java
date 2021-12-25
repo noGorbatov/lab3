@@ -9,6 +9,7 @@ import scala.Tuple2;
 import java.util.List;
 
 public class AirportApp {
+    private static string COMMA_SEP = ",";
     public static void main(String[] args) {
         SparkConf conf = new SparkConf().setAppName("lab3");
         JavaSparkContext sc = new JavaSparkContext(conf);
@@ -21,11 +22,15 @@ public class AirportApp {
             if (i > 5) break;
         }
 
-        JavaRDD<String> ids
+        JavaRDD<String> filteredIds = ids.filter( line -> !Character.isAlphabetic(line.charAt(0)) );
+        JavaPairRDD<Integer, String> airportMapRdd = filteredIds.mapToPair(
+                line -> {
+                    String pair = line.split(",")
+        })
 
         JavaRDD<String> stats = sc.textFile("/stats.csv");
         System.out.println("unfiltered records " + stats.count());
-        JavaRDD<String> filteredStats = stats.filter( s -> Character.isDigit(s.charAt(0)) );
+        JavaRDD<String> filteredStats = stats.filter( line -> Character.isDigit(line.charAt(0)) );
         System.out.println("filtered records " + filteredStats.count());
         JavaPairRDD<AirportKey, FlightData> statsRdd = filteredStats.mapToPair(line -> {
                     ParsedData parsedData = ParsedData.parse(line);
