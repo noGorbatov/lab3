@@ -10,10 +10,12 @@ public class ParsedData implements Serializable {
     private boolean cancelled;
     private static String SPACE_SEP = " ";
     private static int SRC_AIRPORT_POS = 11;
-    private static int DEST_AIRPORT_POS = 11;
+    private static int DEST_AIRPORT_POS = 14;
 
     public static ParsedData parse(String line) {
         String[] data = line.split(SPACE_SEP);
-
+        ParsedData res = new ParsedData();
+        res.srcAirport = data[SRC_AIRPORT_POS];
+        res
     }
 }
