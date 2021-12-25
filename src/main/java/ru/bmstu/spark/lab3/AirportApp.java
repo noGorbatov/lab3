@@ -22,7 +22,9 @@ public class AirportApp {
         }
 
         JavaRDD<String> stats = sc.textFile("/stats.csv");
-        JavaRDD<String> filteredStats = stats.filter( s -> s.charAt(0).)
+        System.out.println("unfiltered records " + stats.count());
+        JavaRDD<String> filteredStats = stats.filter( s -> Character.isDigit(s.charAt(0)) );
+        System.out.println("filtered records " + filteredStats.count());
         JavaPairRDD<AirportKey, FlightData> statsRdd = filteredStats.mapToPair(line -> new Tuple2<>(new Airport))
     }
 }
