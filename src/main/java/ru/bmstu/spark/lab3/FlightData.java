@@ -16,6 +16,14 @@ public class FlightData implements Serializable {
         this.cancelled = cancelled;
     }
 
+    public float getMaxDelayTime() {
+        return maxDelayTime;
+    }
+
+    public float getDelayedPercent() {
+        return 
+    }
+
     @Override
     public String toString() {
         return "FlightData{" +

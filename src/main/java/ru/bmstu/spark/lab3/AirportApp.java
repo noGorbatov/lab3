@@ -56,10 +56,12 @@ public class AirportApp {
                 FlightData::add);
 
         JavaRDD<String> resultStats = airportStats.map(
-                (key, statsData) -> {
-                    airportsBroadcasted.value()[
+                (entry) -> {
+                    AirportKey key = entry._1;
+                    FlightData data = entry._2;
+                    float maxDelay = data.
                 }
-        )
+        );
 
     }
 }
