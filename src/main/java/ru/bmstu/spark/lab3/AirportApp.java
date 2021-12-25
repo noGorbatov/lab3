@@ -33,9 +33,9 @@ public class AirportApp {
 
         JavaRDD<String> stats = sc.textFile("/stats.csv");
         JavaRDD<String> filteredStats = stats.filter( line -> Character.isDigit(line.charAt(0)) );
-        JavaPairRDD<AirportKey, FlightData> statsRdd = filteredStats.mapToPair(line -> {
+        JavaPairRDD<Tuple2<Integer, Integer>, FlightData> statsRdd = filteredStats.mapToPair(line -> {
                     ParsedData parsedData = ParsedData.parse(line);
-                    return new Tuple2<>(new AirportKey(parsedData.getSrcAirport(), parsedData.getDestAirport()),
+                    return new Tuple2<>(new Tuple2<>(parsedData.getSrcAirport(), parsedData.getDestAirport()),
                                         new FlightData(parsedData.getDelayTime(), parsedData.getDelayed(),
                                                         parsedData.getCancelled()));
                 }
@@ -44,10 +44,10 @@ public class AirportApp {
 //        JavaPairRDD<AirportKey, FlightData> airportStats = statsRdd.reduceByKey(
 //                (flightAcc, flightData) -> flightAcc.add(flightData)
 //        );
-        JavaPairRDD<AirportKey, Iterable<FlightData>> airportGrouped = statsRdd.groupByKey();
-        JavaPairRDD<AirportKey, FlightData> airportStats = airportGrouped.mapToPair(
+        JavaPairRDD<Tuple2<Integer, Integer>, Iterable<FlightData>> airportGrouped = statsRdd.groupByKey();
+        JavaPairRDD<Tuple2<Integer, Integer>, FlightData> airportStats = airportGrouped.mapToPair(
                 entry -> {
-                    AirportKey key = entry._1;
+                    Tuple2<Integer, Integer> key = entry._1;
                     Iterable<FlightData> group = entry._2;
                     FlightData res = new FlightData();
                     for (FlightData data: group) {
@@ -59,11 +59,13 @@ public class AirportApp {
 
         JavaRDD<String> resultStats = airportStats.map(
                 (entry) -> {
-                    AirportKey key = entry._1;
+                    Tuple2<Integer, Integer> key = entry._1;
+                    int srcAirportInt = key._1;
+                    int destAirportInt = key._2;
                     FlightData data = entry._2;
                     Map<Integer, String> airportsInfo = airportsBroadcasted.value();
-                    String srcAirport = airportsInfo.get(key.getSrcAirport());
-                    String destAirport = airportsInfo.get(key.getDestAirport());
+                    String srcAirport = airportsInfo.get(srcAirportInt);
+                    String destAirport = airportsInfo.get(destAirportInt);
                     return "Flights stats:\nfrom " + srcAirport + "\nto " + destAirport +
                             "\nmax delay time = " + data.getMaxDelayTime() + "\ndelayed flights = " +
                             data.getDelayedPercent() + "%\ncancelled flights = " +
