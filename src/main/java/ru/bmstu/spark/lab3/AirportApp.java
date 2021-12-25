@@ -56,6 +56,7 @@ public class AirportApp {
 //        );
         JavaPairRDD<Tuple2<Integer, Integer>, FlightData> airportStats = statsRdd.combineByKey(
                 fData -> new FlightData(fData),
+                
 
         )
 

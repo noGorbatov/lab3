@@ -18,7 +18,9 @@ public class FlightData implements Serializable {
     }
 
     public FlightData(FlightData fData) {
-
+        this.maxDelayTime = fData.delayTime;
+        this.cancelledNumber = fData.cancelled ? 1 : 0;
+        this.delayedNumber = fData.delayed ? 1 : 0;
     }
 
     public float getMaxDelayTime() {
