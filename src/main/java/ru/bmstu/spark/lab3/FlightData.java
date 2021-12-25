@@ -41,6 +41,10 @@ public class FlightData implements Serializable {
         return (int)res;
     }
 
+    public int getFlightNumber() {
+        return flightNumber;
+    }
+
     @Override
     public String toString() {
         return "FlightData{" +
