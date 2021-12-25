@@ -23,6 +23,7 @@ public class ParsedData implements Serializable {
         if (res.cancelled) {
             return res;
         }
+        if (data[DELAY_TIME_POS].equals("")) return res;
         res.delayTime = Float.parseFloat(data[DELAY_TIME_POS]);
         res.delayed = res.delayTime > 0;
         return res;
