@@ -27,4 +27,25 @@ public class ParsedData implements Serializable {
         res.delayed = res.delayTime > 0;
         return res;
     }
+
+    public int getSrcAirport() {
+        return srcAirport;
+    }
+
+    public int getDestAirport() {
+        return destAirport;
+    }
+
+    public int getDelayTime() {
+        return delayTime;
+    }
+
+    public boolean getDelayed() {
+        return delayed;
+    }
+
+    public boolean getCancelled() {
+        return cancelled;
+    }
+
 }
