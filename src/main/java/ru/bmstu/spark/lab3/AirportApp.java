@@ -4,6 +4,7 @@ import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
+import scala.Tuple2;
 
 import java.util.List;
 
@@ -21,6 +22,6 @@ public class AirportApp {
         }
 
         JavaRDD<String> stats = sc.textFile("/stats.csv");
-        JavaPairRDD<AirportKey, FlightData> statsRdd = stats.mapToPair(line -> return )
+        JavaPairRDD<AirportKey, FlightData> statsRdd = stats.mapToPair(line -> new Tuple2<>())
     }
 }
