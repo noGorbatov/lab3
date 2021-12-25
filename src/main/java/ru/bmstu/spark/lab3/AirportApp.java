@@ -35,6 +35,6 @@ public class AirportApp {
 
         statsRdd.take(3).forEach(obj -> System.out.println(obj._1 + "\n" + obj._2 + "\n"));
 
-        JavaRDD<AirportKey, FlightData> 
+        JavaRDD<AirportKey, FlightData>
     }
 }
